@@ -1,0 +1,51 @@
+import 'package:flutter/material.dart';
+import 'package:recipe_app/models/recipe.dart';
+import 'package:recipe_app/screen/page_details.dart';
+
+class BuildRecipeCard extends StatelessWidget {
+  final int i;
+  const BuildRecipeCard({
+    Key? key,
+    required this.i,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: GestureDetector(
+        onTap: () {
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (ctx) {
+                return RecipeDetails(
+                  lable: Recipe.samples[i].lable,
+                  imageUrl: Recipe.samples[i].imageUrl,
+                  recipe: Recipe.samples[i],
+                );
+              },
+            ),
+          );
+        },
+        child: Card(
+          elevation: 12,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(15),
+          ),
+          child: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(15),
+                  child: Image.asset(Recipe.samples[i].imageUrl),
+                ),
+              ),
+              Text(Recipe.samples[i].lable),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
